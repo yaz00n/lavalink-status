@@ -47,17 +47,19 @@
 
 ### Hosting 
     Register in [Render](https://render.com) 
-    - Create a new Web service monitor.
-    - Build Command = npm install
-    - Start Command = npm run start
+    • Create a new Web service monitor.
+    • Build Command = npm install
+    • Start Command = npm run start
 
     Add Environment details 
-    - token "",
-    - channelId "",
-    - expressPort ""
+    • token "",
+    • channelId "",
+    • expressPort ""
 
     Deploy your service
-    - After the Deploy is completed you will see the live server add that website into some website monitor such as [BetterStack](https://uptime.betterstack.com) , [UptimeeRobot](https://uptimerobot.com) or any other service you like. And you are good to go
+    • After the Deploy is completed you will see the live server add that website into some 
+    website monitor such as [BetterStack](https://uptime.betterstack.com) , [UptimeeRobot]
+    (https://uptimerobot.com) or any other service you like. And you are good to go
 
     Now your server will be online 24/7 
 
