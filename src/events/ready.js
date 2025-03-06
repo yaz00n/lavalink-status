@@ -105,7 +105,7 @@ module.exports = async (client) => {
       const rembed = new EmbedBuilder()
         .setColor(resolveColor("#2F3136"))
         .setAuthor({
-          name: `Lavalink Monitor`,
+          name: `Gaurav's Lavalink Monitor`,
           iconURL: client.user.displayAvatarURL({ forceStatic: false }),
         })
         .setDescription(`\`\`\`diff\n${data.join("\n\n")}\`\`\``)
@@ -129,7 +129,7 @@ module.exports = async (client) => {
     status: "online",
     activities: [
       {
-        name: "Gaurav Lavalink Status",
+        name: "Lavalink Status",
         type: ActivityType.Watching,
       },
     ],
