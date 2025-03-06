@@ -18,7 +18,7 @@ module.exports = {
     {
       host: "",  
       password: "", 
-      port: , 
+      port: 0, 
       identifier: "",
       secure: false,
       reconnectTimeout: 300000,
