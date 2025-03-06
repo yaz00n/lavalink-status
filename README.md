@@ -37,17 +37,13 @@
 
 ## Web Monitor
 
-- Preview: 
+- Preview: [Website](https://lavalink-3z4a.onrender.com/)
 
 1. **Enable Web Monitor**:
     - Set `webMonitor` to `true` in the [config.js](https://github.com/gaurav87565/Lavalink-status/blob/main/src/config.js) file.
 
 2. **Custom Domain**:
     - You can setup your custom domain by using services like Cloudflare Tunnel or any other preferable services which assigns custom domain.
-
-### Web Monitor Preview
-
-![Web Monitor Preview](assets/image.png)
 
 ### Hosting 
     Register in [Render](https://render.com) 
@@ -72,3 +68,9 @@
     <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />
   </a>
 </div>
+
+### Web Monitor Preview
+
+![Discord Monitor Preview](/Images/Discord bot.png)
+![Web Monitor Dark mode Preview](/Images/Dark mode.png)
+![Web Monitor Normal mode Preview](/Images/Normal mode.png)
