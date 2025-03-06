@@ -61,6 +61,12 @@
 
     Now your server will be online 24/7 
 
+### Web Monitor Preview
+
+![Discord Monitor Preview](/Images/image1.png)
+![Web Monitor Dark mode Preview](/Images/image2.png)
+![Web Monitor Normal mode Preview](/Images/image3.png)
+
 - <h1 align="center">If you encounter any error join our discord server or open a issue on the github page</h1>
       
     <div align="left">
@@ -68,9 +74,3 @@
     <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />
   </a>
 </div>
-
-### Web Monitor Preview
-
-![Discord Monitor Preview](/Images/image1.png)
-![Web Monitor Dark mode Preview](/Images/image2.png)
-![Web Monitor Normal mode Preview](/Images/image3.png)
