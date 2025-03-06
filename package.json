@@ -1,0 +1,25 @@
+{
+  "name": "lavalink-status",
+  "version": "1.2.5",
+  "description": "Monitor your lavalink",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/gaurav87565/Lavalink-status.git",
+  "author": "Gaurav",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaurav87565/Lavalink-status/issues"
+  },
+  "homepage": "https://github.com/gaurav87565/Lavalink-status#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "discord.js": "^14.15.3",
+    "express": "^4.19.2",
+    "moment": "^2.30.1",
+    "moment-duration-format": "^2.3.2",
+    "pretty-bytes": "^6.1.1"
+  }
+}
