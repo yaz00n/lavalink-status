@@ -23,7 +23,7 @@
     ```
 
 5. **Start the Bot**:
-    - Use one of the following commands to start the bot:
+    - Run the following commands to start the bot:
     ```sh
     npm run start
     ```
