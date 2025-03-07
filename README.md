@@ -1,4 +1,4 @@
-<h1 align="center">Lavalink Status Monitor</h1>
+<h1 align="center"><img src="Images/logo.png" alt="DaPirates Logo" width="40">Lavalink Status Monitor</h1>
 
 <p align="center"><strong>Note:</strong> This monitor only supports Lavalink v4. Lavalink v3 is no longer maintained</p>
 
@@ -75,4 +75,18 @@
   <a href="https://discord.gg/gMq7uwHSjY" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />
   </a>
+  <a href="https://github.com/gaurav87565/Lavalink-status/issues" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Github&logo=github&label=&color=000000&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="github logo"  />
+  </a>
+  
+</div>
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+  Made with ❤️ by the (Gaurav) DaPirates Development Team
 </div>
