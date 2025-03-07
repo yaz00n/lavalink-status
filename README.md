@@ -37,7 +37,9 @@
 
 ## Web Monitor
 
-- Preview: [Website](https://lavalink-3z4a.onrender.com/)
+- <h1>Preview : <a href="https://lavalink-3z4a.onrender.com/" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Website&label=&color=ffffff&labelColor=000000&style=for-the-badge" height="25" alt="website"  />
+  </a></h1>
 
 1. **Enable Web Monitor**:
     - Set `webMonitor` to `true` in the [config.js](https://github.com/gaurav87565/Lavalink-status/blob/main/src/config.js) file.
