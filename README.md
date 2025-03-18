@@ -68,8 +68,7 @@
 ### Web Monitor Preview
 
 ![Discord Monitor Preview](/Images/image1.png)
-![Web Monitor Dark mode Preview](/Images/image2.png)
-![Web Monitor Normal mode Preview](/Images/image3.png)
+![Web Monitor Preview](/Images/image2.png)
 
 - <h1 align="center">If you encounter any error join our discord server or open a issue on the github page</h1>
       

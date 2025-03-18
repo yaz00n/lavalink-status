@@ -4,35 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DaPirates Lavalink Status</title>
+    <title>Gaurav's Lavalink Status</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .dark-mode {
-            background-color: #121212;
+            background-color: #2b2d31;
             color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.4s, color 0.4s;
         }
 
-        .dark-mode .card {
-            background-color: #2c2c2c;
-            color: #ffffff;
+        nav {
+            background: linear-gradient(90deg, #5865f2, #4e5bb1);
         }
 
-        .dark-mode .pre-wrap {
-            background-color: #444444;
+        .card {
+            background-color: #313338;
+            border: 1px solid #3f4147;
         }
 
-        .hidden {
-            display: none;
-        }
-
-        .loading {
-            text-align: center;
-            margin-top: 20px;
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            transition: all 0.3s ease;
+            background-color: #36393f;
         }
 
         .modal {
@@ -41,70 +39,127 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 50;
+            backdrop-filter: blur(4px);
         }
 
         .modal-content {
-            background: white;
-            padding: 20px;
+            background: #313338;
+            color: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.6);
+            animation: slideIn 0.3s ease;
+            border: 1px solid #4f545c;
+        }
+
+        .modal-section {
+            margin-bottom: 20px;
+            padding: 12px;
+            background-color: #36393f;
             border-radius: 8px;
-            width: 80%;
-            max-width: 500px;
-            max-height: 80%;
-            overflow-y: auto;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .dark-mode .modal-content {
-            background: #333333;
+        .modal-section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #7289da;
         }
 
-        .pre-wrap {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+        .modal-section ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        .modal-section ul li {
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .close-modal {
             cursor: pointer;
             float: right;
-            font-size: 35px;
-            font-weight: bold;
-            margin-top: -12px;
+            font-size: 30px;
+            margin-top: -8px;
+            margin-right: -5px;
+            color: #aaa;
         }
 
         .close-modal:hover {
-            color: #9BA2AE;
+            color: #ffffff;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            background-color: #232428;
+            text-align: center;
+            color: #b0b3b8;
+        }
+
+        footer a {
+            color: #7289da;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .status-dot {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
         }
     </style>
 </head>
 
-<body class="bg-gray-100 text-gray-900">
-    <nav class="bg-gray-800 p-4 text-white flex justify-between items-center fixed w-full top-0 z-10">
-        <a class="text-2xl font-semibold" href="#">DaPirates Lavalink Status</a>
+<body>
+    <nav class="p-4 text-white flex justify-between items-center fixed w-full top-0 z-10 shadow-lg">
+        <a class="text-2xl font-bold tracking-wide" href="#">Gaurav's Lavalink Status</a>
         <div class="flex items-center space-x-4">
-            <a href="https://github.com/gaurav87565/Lavalink-status"
-                class="flex items-center space-x-1 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-lg"
-                target="_blank">
-                <i class="fa fa-github"></i>
+            <a href="https://github.com/gaurav87565/Lavalink-status" target="_blank"
+                class="bg-gray-700 text-gray-200 px-3 py-2 rounded hover:bg-gray-600 transition">
+                <i class="fa fa-github text-xl"></i>
             </a>
-            <button id="theme-toggle"
-                class="flex items-center space-x-1 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-lg">
-                <i class="fa fa-moon-o"></i>
-            </button>
         </div>
     </nav>
 
-    <div class="container mx-auto pt-20">
-        <div id="loading" class="loading font-semibold text-lg text-center">Fetching stats...</div>
-        <div id="refresh-notice" class="refresh-notice font-semibold text-lg text-center mt-4">This page reloads every 1
-            minute.</div>
-        <div id="stats" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"></div>
-    </div>
+    <main class="container mx-auto pt-24 pb-10 flex-grow">
+        <div id="loading" class="loading text-xl font-semibold text-center text-gray-300">Loading stats...</div>
+        <div id="refresh-notice" class="text-center text-md mt-2 mb-4 italic hidden">Refreshing every 60 seconds...</div>
+        <div id="stats" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6 px-4"></div>
+    </main>
 
     <div id="modal" class="modal hidden">
         <div class="modal-content">
@@ -114,39 +169,14 @@
     </div>
 
     <footer>
-        <div class="card mt-10 p-3 bg-white">
-            <p class="text-center text-lg font-semibold">Copyright © <a href="https://github.com/gaurav87565/Lavalink-status"
-                    class="text-blue-600">Gaurav - DaPirates Development Team</a></p>
-        </div>
+        <p>Made with ❤️ by <a href="https://github.com/gaurav87565/Lavalink-status">Gaurav — DaPirates Team</a></p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const icon = themeToggleBtn.querySelector('i');
             const modal = document.getElementById('modal');
             const closeModalBtn = document.querySelector('.close-modal');
             const modalDetails = document.getElementById('modal-details');
-
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('dark-mode');
-                icon.classList.remove('fa-moon-o');
-                icon.classList.add('fa-sun-o');
-            }
-
-            themeToggleBtn.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                if (document.body.classList.contains('dark-mode')) {
-                    icon.classList.remove('fa-moon-o');
-                    icon.classList.add('fa-sun-o');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    icon.classList.remove('fa-sun-o');
-                    icon.classList.add('fa-moon-o');
-                    localStorage.setItem('theme', 'light');
-                }
-            });
 
             closeModalBtn.addEventListener('click', () => {
                 modal.classList.add('hidden');
@@ -154,7 +184,6 @@
             });
 
             modal.addEventListener('click', (event) => {
-                // Close modal if the click is on the modal backdrop (not the content)
                 if (event.target === modal) {
                     modal.classList.add('hidden');
                     modal.style.display = 'none';
@@ -164,9 +193,6 @@
             async function fetchNodeInfo(nodeIndex) {
                 try {
                     const response = await fetch(`/info`);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
                     const info = await response.json();
                     return info[nodeIndex];
                 } catch (error) {
@@ -178,15 +204,12 @@
             async function fetchStats() {
                 try {
                     const response = await fetch('/stats');
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
                     const stats = await response.json();
                     const statsDiv = document.getElementById('stats');
                     const loadingDiv = document.getElementById('loading');
                     const refreshNoticeDiv = document.getElementById('refresh-notice');
 
-                    if (Object.keys(stats).length === 0) {
+                    if (!stats.length) {
                         loadingDiv.classList.remove('hidden');
                         refreshNoticeDiv.classList.add('hidden');
                     } else {
@@ -195,57 +218,60 @@
                         statsDiv.innerHTML = '';
 
                         stats.forEach((stat, index) => {
-                            const statElement = document.createElement('div');
-                            statElement.className = "card bg-white p-4 rounded shadow-lg mx-3 mt-5 transform transition-transform hover:-translate-y-1 hover:shadow-2xl dark:hover:shadow-[0_4px_15px_rgba(255,255,255,0.2)] cursor-pointer";
-                            statElement.innerHTML = `
-        <div class="card-body">
-            <p class="font-bold text-2xl mt-2 mb-3 border-b-2 border-gray-700 pb-2">
-            ${stat.node}
-            <span class="inline-block w-4 h-4 rounded-full ml-2 ${stat.online === true ? 'bg-green-500 animate-pulse' : 'bg-red-500 animate-pulse'}"></span>
-        </p>
-            <p class="card-text"><strong>Status:</strong> ${stat.status}</p>
-            <p class="card-text"><strong>Players:</strong> ${stat.activePlayers}/${stat.players}</p>
-            <p class="card-text"><strong>Uptime:</strong> ${stat.uptime}</p>
-            <p class="card-text"><strong>Cores:</strong> ${stat.cores}</p>
-            <p class="card-text"><strong>Memory Usage:</strong> ${stat.memoryUsed}/${stat.memoryReservable}</p>
-            <p class="card-text"><strong>System Load:</strong> ${stat.systemLoad}%</p>
-            <p class="card-text"><strong>Lavalink Load:</strong> ${stat.lavalinkLoad}%</p>
-        </div>
-    `;
+                            const card = document.createElement('div');
+                            card.className = "card p-5 rounded-xl shadow-lg cursor-pointer transition-transform";
+                            card.innerHTML = `
+                                <h2 class="font-bold text-xl mb-3">${stat.node}
+                                    <span class="inline-block w-3 h-3 rounded-full ml-2 ${stat.online ? 'bg-green-400' : 'bg-red-500'} status-dot"></span>
+                                </h2>
+                                <p><strong>Status:</strong> ${stat.status}</p>
+                                <p><strong>Players:</strong> ${stat.activePlayers}/${stat.players}</p>
+                                <p><strong>Uptime:</strong> ${stat.uptime}</p>
+                                <p><strong>Cores:</strong> ${stat.cores}</p>
+                                <p><strong>Memory Usage:</strong> ${stat.memoryUsed} / ${stat.memoryReservable}</p>
+                                <p><strong>System Load:</strong> ${stat.systemLoad}%</p>
+                                <p><strong>Lavalink Load:</strong> ${stat.lavalinkLoad}%</p>`;
 
-                            function capitalizeFirstLetter(string) {
-                                return string.charAt(0).toUpperCase() + string.slice(1);
-                            }
-
-                            statElement.addEventListener('click', async () => {
+                            card.addEventListener('click', async () => {
                                 const nodeInfo = await fetchNodeInfo(index);
-                                if (nodeInfo) {
-                                    modalDetails.innerHTML = `
-            <h2 class="text-xl font-bold mb-4">Node Details: ${stat.node}</h2>
-<p><strong>Lavalink Version:</strong> <pre class="pre-wrap bg-gray-300 p-2 rounded rounded-md">${nodeInfo.version?.semver || "Unknown"}</pre></p>
-<p><strong>Lavaplayer Version:</strong> <pre class="pre-wrap bg-gray-300 p-2 rounded rounded-md">${nodeInfo.lavaplayer || "Unknown"}</pre></p>
-<p><strong>Plugins:</strong> <pre class="pre-wrap bg-gray-300 p-2 rounded rounded-md">${(nodeInfo.plugins?.map(p => `${p.name} v${p.version}`).join(', ') || "Unknown")}</pre></p>
-<p><strong>Sources:</strong> <pre class="pre-wrap bg-gray-300 p-2 rounded rounded-md">${nodeInfo.sourceManagers?.map(source => capitalizeFirstLetter(source)).join(', ') || "Unknown"}</pre></p>
-<p><strong>Filters:</strong> <pre class="pre-wrap bg-gray-300 p-2 rounded rounded-md">${nodeInfo.filters?.map(filter => capitalizeFirstLetter(filter)).join(', ') || "Unknown"}</pre></p>
-
-            `;
-                                } else {
-                                    modalDetails.innerHTML = '<p>Error fetching node details.</p>';
-                                }
+                                modalDetails.innerHTML = `
+                                    <h2 class="text-xl font-bold mb-4">Node: ${stat.node}</h2>
+                                    <div class="modal-section">
+                                        <h3>Lavalink Version</h3>
+                                        <p>${nodeInfo?.version?.semver ?? 'Unknown'}</p>
+                                    </div>
+                                    <div class="modal-section">
+                                        <h3>Lavaplayer Version</h3>
+                                        <p>${nodeInfo?.lavaplayer ?? 'Unknown'}</p>
+                                    </div>
+                                    <div class="modal-section">
+                                        <h3>Plugins</h3>
+                                        <ul>
+                                            ${(nodeInfo?.plugins?.map(p => `<li>${p.name} v${p.version}</li>`).join('') ?? '<li>Unknown</li>')}
+                                        </ul>
+                                    </div>
+                                    <div class="modal-section">
+                                        <h3>Sources</h3>
+                                        <p>${nodeInfo?.sourceManagers?.join(', ') ?? 'Unknown'}</p>
+                                    </div>
+                                    <div class="modal-section">
+                                        <h3>Filters</h3>
+                                        <p>${nodeInfo?.filters?.join(', ') ?? 'Unknown'}</p>
+                                    </div>`;
                                 modal.classList.remove('hidden');
                                 modal.style.display = 'flex';
                             });
 
-                            statsDiv.appendChild(statElement);
+                            statsDiv.appendChild(card);
                         });
                     }
-                } catch (error) {
-                    console.error('Error fetching stats:', error);
+                } catch (err) {
+                    console.error('Error:', err);
                 }
             }
 
-            setInterval(fetchStats, 60000);
             fetchStats();
+            setInterval(fetchStats, 60000);
         });
     </script>
 </body>
