@@ -6,7 +6,7 @@
   <a href="https://www.youtube.com/@Da_Pirates" target="_blank">
     <img src="https://img.shields.io/static/v1?message=YouTube&logo=youtube&label=&color=red&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="YouTube"  />
   </a>
-  <a href="https://discord.gg/gMq7uwHSjY" target="_blank">
+  <a href="https://discord.gg/kAYpdenZ8b" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />
   </a>
 </div>
@@ -42,7 +42,7 @@
     
     OR
 
-    Join our discord server [Discord](https://discord.gg/gMq7uwHSjY).
+    Join our discord server [Discord](https://discord.gg/kAYpdenZ8b).
 
 ## Web Monitor
 
@@ -82,7 +82,7 @@
 - <h1 align="center">If you encounter any error join our discord server or open a issue on the github page</h1>
       
     <div align="left">
-  <a href="https://discord.gg/gMq7uwHSjY" target="_blank">
+  <a href="https://discord.gg/kAYpdenZ8b" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />
   </a>
   <a href="https://github.com/gaurav87565/Lavalink-status/issues" target="_blank">
