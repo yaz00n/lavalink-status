@@ -2,6 +2,15 @@
 
 <p align="center"><strong>Note:</strong> This monitor only supports Lavalink v4. Lavalink v3 is no longer maintained</p>
 
+<div align="center">
+  <a href="https://www.youtube.com/@Da_Pirates" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=YouTube&logo=youtube&label=&color=red&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="YouTube"  />
+  </a>
+  <a href="https://discord.gg/gMq7uwHSjY" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />
+  </a>
+</div>
+
 ## Installation / Hosting Guide
 
 1. **Ensure NodeJS v18 or Later**:
