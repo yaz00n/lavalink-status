@@ -1,6 +1,6 @@
 module.exports = {
   token: process.env.token || "", // Ensure this env variable is set
-  channelId: process.env.channelId || "",
+  channelId: process.env.channelId || "1408704855698182224",
 
   webMonitor: true, // Set to false if you don't want a website
   expressPort: process.env.expressPort || 3000,
