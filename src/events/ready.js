@@ -129,8 +129,8 @@ module.exports = async (client) => {
     status: "online",
     activities: [
       {
-        name: "Nova Lavalink Status",
-        type: ActivityType.Watching,
+        name: "Nova Lounge System",
+        type: ActivityType.Playing,
       },
     ],
   });
