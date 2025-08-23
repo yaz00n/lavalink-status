@@ -129,7 +129,7 @@ module.exports = async (client) => {
     status: "online",
     activities: [
       {
-        name: "Lavalink Status",
+        name: "Nova Lavalink Status",
         type: ActivityType.Watching,
       },
     ],
