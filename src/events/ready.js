@@ -129,7 +129,7 @@ module.exports = async (client) => {
     status: "online",
     activities: [
       {
-        name: "Lavalink is Online",
+        name: "Servers Are Operational",
         type: ActivityType.Playing,
       },
     ],
