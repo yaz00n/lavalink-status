@@ -7,18 +7,18 @@ module.exports = {
 
   nodes: [
     {
-      host: "helya.wisp.uno", // Your lavalink host address 
+      host: "5.39.63.207", // Your lavalink host address 
       password: "glace", // Your lavalink password
-      port: 13374, // Your lavalink port
+      port: 8262, // Your lavalink port
       identifier: "Nova Lounge lavalink", // Name for your lavalink
       secure: false, // set to true if your lavalink has SSL
       reconnectTimeout: 300000,
       reconnectTries: 100,
     },
     {
-      host: "helya.wisp.uno",  
+      host: "5.39.63.207",  
       password: "glace", 
-      port: 13374, 
+      port: 8262, 
       identifier: "Nova Lounge lavalink",
       secure: false,
       reconnectTimeout: 300000,
