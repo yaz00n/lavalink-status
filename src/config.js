@@ -8,7 +8,7 @@ module.exports = {
   nodes: [
     {
       host: "helya.wisp.uno", // Your lavalink host address 
-      password: "novaloungehosting", // Your lavalink password
+      password: "glace", // Your lavalink password
       port: 13374, // Your lavalink port
       identifier: "Nova Lounge lavalink", // Name for your lavalink
       secure: false, // set to true if your lavalink has SSL
@@ -17,7 +17,7 @@ module.exports = {
     },
     {
       host: "helya.wisp.uno",  
-      password: "novaloungehosting", 
+      password: "glace", 
       port: 13374, 
       identifier: "Nova Lounge lavalink",
       secure: false,
