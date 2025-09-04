@@ -7,18 +7,18 @@ module.exports = {
 
   nodes: [
     {
-      host: "193.226.78.187", // Your lavalink host address 
-      password: "novaloungehosting", // Your lavalink password
-      port: 6473, // Your lavalink port
+      host: "wintr.wisp.uno", // Your lavalink host address 
+      password: "novalounge", // Your lavalink password
+      port: 13488, // Your lavalink port
       identifier: "Nova Lounge lavalink", // Name for your lavalink
       secure: false, // set to true if your lavalink has SSL
       reconnectTimeout: 300000,
       reconnectTries: 100,
     },
     {
-      host: "193.226.78.187",  
-      password: "novaloungehosting", 
-      port: 6473, 
+      host: "wintr.wisp.uno",  
+      password: "novalounge", 
+      port: 13488, 
       identifier: "Nova Lounge lavalink",
       secure: false,
       reconnectTimeout: 300000,
