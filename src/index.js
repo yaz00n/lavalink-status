@@ -12,7 +12,6 @@ const {
 } = require("discord.js");
 const { readdirSync } = require("fs");
 const colors = require("colors");
-require("dotenv").config();
 
 const Manager = require("./wrapper/index");
 const { token, nodes, webMonitor } = require("./config");
