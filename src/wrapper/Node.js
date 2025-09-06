@@ -3,9 +3,9 @@ const colors = require("colors");
 
 class Node {
   constructor(options) {
-    this.host = options.host || "helya.wisp.uno";
-    this.port = options.port || 13374;
-    this.password = options.password || "novaloungehosting";
+    this.host = options.host || "194.58.66.44";
+    this.port = options.port || 6284;
+    this.password = options.password || "newgenstudio";
     this.secure = options.secure || false;
     this.identifier = options.identifier || this.host;
     this.nodesMap = null;
