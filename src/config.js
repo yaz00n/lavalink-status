@@ -7,18 +7,18 @@ module.exports = {
 
   nodes: [
     {
-      host: "193.226.78.187", // Your lavalink host address 
+      host: "194.58.66.44", // Your lavalink host address 
       password: "newgenstudio", // Your lavalink password
-      port: 6473, // Your lavalink port
+      port: 6284, // Your lavalink port
       identifier: "NewGen Studio Lavalink", // Name for your lavalink
       secure: false, // set to true if your lavalink has SSL
       reconnectTimeout: 300000,
       reconnectTries: 100,
     },
     {
-      host: "193.226.78.187",  
+      host: "194.58.66.44",  
       password: "newgenstudio", 
-      port: 6473, 
+      port: 6284, 
       identifier: "NewGen Studio Lavalink",
       secure: false,
       reconnectTimeout: 300000,
