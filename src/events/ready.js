@@ -129,7 +129,7 @@ module.exports = async (client) => {
     status: "online",
     activities: [
       {
-        name: "Servers Are Operational",
+        name: "Order Manger 🏪",
         type: ActivityType.Playing,
       },
     ],
