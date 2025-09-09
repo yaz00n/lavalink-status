@@ -145,7 +145,7 @@ Please fill in the answers below so our developers can fulfill your order:
     // DM confirmation
     const dmEmbed = new EmbedBuilder()
         .setTitle("📦 Ticket Created")
-        .setDescription(`Your support ticket has been opened in **${guild.name}**.\nPlease describe your order in the channel: ${channel}`)
+        .setDescription(`Your order ticket has been opened in **${guild.name}**.\nPlease describe your order in the channel: ${channel}`)
         .setColor(0x2b2d31)
         .setTimestamp();
 
@@ -156,7 +156,7 @@ Please fill in the answers below so our developers can fulfill your order:
     if (interaction.customId === "close_ticket") {
         const closeEmbed = new EmbedBuilder()
             .setTitle("📕 Ticket Closed")
-            .setDescription(`Your support ticket in **${interaction.guild.name}** has been closed.\nThank you for reaching out!`)
+            .setDescription(`Your order ticket in **${interaction.guild.name}** has been closed.\nThank you for reaching out!`)
             .setColor(0xff0000)
             .setTimestamp();
 
