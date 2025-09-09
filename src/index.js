@@ -104,7 +104,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         });
 
         const ticketEmbed = new EmbedBuilder()
-            .setTitle("📦 Support Ticket")
+            .setTitle("📦 Order Ticket")
             .setDescription(`Hello ${user}, welcome to our support!\nPlease describe your order in detail.`)
             .setColor(0x2b2d31)
             .setFooter({ text: "💜 Your satisfaction is our priority", iconURL: client.user.displayAvatarURL() })
@@ -116,6 +116,27 @@ client.on(Events.InteractionCreate, async (interaction) => {
         );
 
         await channel.send({ content: `<@&${staffRoleId}> ${user}`, embeds: [ticketEmbed], components: [row] });
+
+        // 🆕 Welcome + Questionnaire Message
+        await channel.send({
+            content: `Hello ${user}, welcome to our ordering system please fill in the answers below so our developers can fulfill your order!\n\`\`\`1 - What type of discord bot are you choosing to order from #〔🛍️〕products 
+
+2 - What would you like to name your bot?*
+
+3 - What is your discord ID?*
+
+4 - What would you like your bot’s profile picture to be?
+
+5 - What would like your bots status to be? (Ex: Playing: NewGen Studio)*
+
+6 - How would you like to pay for your bot via PayPal/Credit Card/Invites/Bank Transfer*
+
+7 - How long would you like to host your bot (Ex: 1 Month, 5 Months)*
+
+8 - What prefix would you like for your bot?*
+
+9 - Any other add on’s to your discord bot?\`\`\`\n<:ok:1413845645084725382> Note: Anything that has a \`*\` after it is needed for your order!`
+        });
 
         const dmEmbed = new EmbedBuilder()
             .setTitle("📦 Ticket Created")
@@ -136,6 +157,25 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
         await interaction.user.send({ embeds: [closeEmbed] }).catch(() => console.log(`❌ Could not DM ${interaction.user.tag}`));
         await interaction.channel.send({ embeds: [closeEmbed] });
+
+        // 📝 Order Log
+        const ORDER_LOG_CHANNEL_ID = "1414807932457193612"; // TODO: Replace with your real log channel ID
+        const logChannel = guild.channels.cache.get(ORDER_LOG_CHANNEL_ID);
+        if (logChannel) {
+            const logEmbed = new EmbedBuilder()
+                .setTitle("📦 Order Ticket Closed")
+                .setColor(0xffa500)
+                .addFields(
+                    { name: "Closed By", value: `${interaction.user.tag}`, inline: true },
+                    { name: "Ticket Name", value: `${interaction.channel.name}`, inline: true },
+                    { name: "Closed At", value: `<t:${Math.floor(Date.now() / 1000)}:F>`, inline: false }
+                )
+                .setFooter({ text: `Guild: ${guild.name}`, iconURL: guild.iconURL() })
+                .setTimestamp();
+
+            await logChannel.send({ embeds: [logEmbed] }).catch(() => console.log("❌ Could not send order log"));
+        }
+
         await interaction.channel.delete();
     }
 
