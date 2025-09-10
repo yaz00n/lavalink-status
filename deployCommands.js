@@ -3,8 +3,8 @@ const { token } = require("./config");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const CLIENT_ID = "YOUR_CLIENT_ID"; // Replace with your bot's client ID
-const GUILD_ID = "YOUR_GUILD_ID";   // Replace with your target guild ID
+const CLIENT_ID = "1413509849555275826"; // Replace with your bot's client ID
+const GUILD_ID = "1412831815772667904";   // Replace with your target guild ID
 
 const commands = [
     new SlashCommandBuilder()
