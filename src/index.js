@@ -8,7 +8,11 @@ const {
     ButtonStyle,
     Events,
     EmbedBuilder,
-    ActivityType
+    ActivityType,
+    ModalBuilder,
+    TextInputBuilder,
+    TextInputStyle,
+    InteractionType
 } = require("discord.js");
 const { readdirSync } = require("fs");
 const colors = require("colors");
@@ -79,79 +83,82 @@ client.on(Events.MessageCreate, async (message) => {
         const row = new ActionRowBuilder().addComponents(createButton);
         await message.channel.send({ embeds: [embed], components: [row] });
     }
+
+    if (message.content === "!review") {
+        const reviewEmbed = new EmbedBuilder()
+            .setTitle("📝 Submit Your Review")
+            .setDescription("We highly value your feedback and kindly request your participation in a brief review to assist us in enhancing our services.")
+            .setColor(0x2b2d31)
+            .setFooter({ text: "⭐ Request created at: " + new Date().toLocaleTimeString(), iconURL: client.user.displayAvatarURL() })
+            .setTimestamp();
+
+        const reviewButtons = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setCustomId("submit_review")
+                .setLabel("Submit A Review")
+                .setStyle(ButtonStyle.Success)
+        );
+
+        await message.channel.send({ embeds: [reviewEmbed], components: [reviewButtons] });
+    }
 });
 
 // 🎯 Interaction Handler
 client.on(Events.InteractionCreate, async (interaction) => {
-    if (!interaction.isButton()) return;
+    if (interaction.customId === "create_order") {
+        const categoryId = "1413535890890031104";
+        const staffRoleId = "1412831815793901579";
 
-    const user = interaction.user;
-    const guild = interaction.guild;
+        const channel = await interaction.guild.channels.create({
+            name: `order-${interaction.user.username}`,
+            type: 0,
+            parent: categoryId,
+            permissionOverwrites: [
+                { id: interaction.guild.id, deny: [PermissionsBitField.Flags.ViewChannel] },
+                { id: interaction.user.id, allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages] },
+                { id: client.user.id, allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages] }
+            ]
+        });
 
-if (interaction.customId === "create_order") {
-    const categoryId = "1413535890890031104";
-    const staffRoleId = "1412831815793901579";
-
-    const channel = await guild.channels.create({
-        name: `order-${user.username}`,
-        type: 0,
-        parent: categoryId,
-        permissionOverwrites: [
-            { id: guild.id, deny: [PermissionsBitField.Flags.ViewChannel] },
-            { id: user.id, allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages] },
-            { id: client.user.id, allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages] }
-        ]
-    });
-
-    // 🆕 Combined Embed with Questionnaire
-    const ticketEmbed = new EmbedBuilder()
-        .setTitle("📦 Order Ticket")
-        .setDescription(
-`Hello ${user}, welcome to our ordering system!  
+        const ticketEmbed = new EmbedBuilder()
+            .setTitle("📦 Order Ticket")
+            .setDescription(
+`Hello ${interaction.user}, welcome to our ordering system!  
 Please fill in the answers below so our developers can fulfill your order:
 
 \`\`\`
 1 - What type of discord bot are you choosing to order from #〔🛍️〕products 
-
 2 - What would you like to name your bot?*
-
 3 - What is your discord ID?*
-
 4 - What would you like your bot’s profile picture to be?
-
 5 - What would like your bot’s status to be? (Ex: Playing: NewGen Studio)*
-
 6 - How would you like to pay for your bot via PayPal/Credit Card/Invites/Bank Transfer*
-
 7 - How long would you like to host your bot (Ex: 1 Month, 5 Months)*
-
 8 - What prefix would you like for your bot?*
-
 9 - Any other add-ons to your discord bot?
 \`\`\`
 <:ok:1413845645084725382> **Note:** Anything with a \`*\` is required for your order!`
-        )
-        .setColor(0x2b2d31)
-        .setFooter({ text: "💜 Your satisfaction is our priority", iconURL: client.user.displayAvatarURL() })
-        .setTimestamp();
+            )
+            .setColor(0x2b2d31)
+            .setFooter({ text: "💜 Your satisfaction is our priority", iconURL: client.user.displayAvatarURL() })
+            .setTimestamp();
 
-    const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId("close_ticket").setLabel("📕 Close Ticket").setStyle(ButtonStyle.Danger),
-        new ButtonBuilder().setCustomId("claim_ticket").setLabel("🎯 Claim Ticket").setStyle(ButtonStyle.Secondary)
-    );
+        const row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId("close_ticket").setLabel("📕 Close Ticket").setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId("claim_ticket").setLabel("🎯 Claim Ticket").setStyle(ButtonStyle.Secondary)
+        );
 
-    await channel.send({ content: `<@&${staffRoleId}> ${user}`, embeds: [ticketEmbed], components: [row] });
+        await channel.send({ content: `<@&${staffRoleId}> ${interaction.user}`, embeds: [ticketEmbed], components: [row] });
 
-    // DM confirmation
-    const dmEmbed = new EmbedBuilder()
-        .setTitle("📦 Ticket Created")
-        .setDescription(`Your order ticket has been opened in **${guild.name}**.\nPlease describe your order in the channel: ${channel}`)
-        .setColor(0x2b2d31)
-        .setTimestamp();
+        const dmEmbed = new EmbedBuilder()
+            .setTitle("📦 Ticket Created")
+            .setDescription(`Your order ticket has been opened in **${interaction.guild.name}**.\nPlease describe your order in the channel: ${channel}`)
+            .setColor(0x2b2d31)
+            .setTimestamp();
 
-    await user.send({ embeds: [dmEmbed] }).catch(() => console.log(`❌ Could not DM ${user.tag}`));
-    await interaction.reply({ content: `✅ Your order ticket has been created: ${channel}`, ephemeral: true });
-}
+        await interaction.user.send({ embeds: [dmEmbed] }).catch(() => console.log(`❌ Could not DM ${interaction.user.tag}`));
+        await interaction.reply({ content: `✅ Your order ticket has been created: ${channel}`, ephemeral: true });
+    }
 
     if (interaction.customId === "close_ticket") {
         const closeEmbed = new EmbedBuilder()
@@ -163,9 +170,8 @@ Please fill in the answers below so our developers can fulfill your order:
         await interaction.user.send({ embeds: [closeEmbed] }).catch(() => console.log(`❌ Could not DM ${interaction.user.tag}`));
         await interaction.channel.send({ embeds: [closeEmbed] });
 
-        // 📝 Order Log
-        const ORDER_LOG_CHANNEL_ID = "1414807932457193612"; // TODO: Replace with your real log channel ID
-        const logChannel = guild.channels.cache.get(ORDER_LOG_CHANNEL_ID);
+        const ORDER_LOG_CHANNEL_ID = "1414807932457193612";
+        const logChannel = interaction.guild.channels.cache.get(ORDER_LOG_CHANNEL_ID);
         if (logChannel) {
             const logEmbed = new EmbedBuilder()
                 .setTitle("📦 Order Ticket Closed")
@@ -175,7 +181,7 @@ Please fill in the answers below so our developers can fulfill your order:
                     { name: "Ticket Name", value: `${interaction.channel.name}`, inline: true },
                     { name: "Closed At", value: `<t:${Math.floor(Date.now() / 1000)}:F>`, inline: false }
                 )
-                .setFooter({ text: `Guild: ${guild.name}`, iconURL: guild.iconURL() })
+                .setFooter({ text: `Guild: ${interaction.guild.name}`, iconURL: interaction.guild.iconURL() })
                 .setTimestamp();
 
             await logChannel.send({ embeds: [logEmbed] }).catch(() => console.log("❌ Could not send order log"));
@@ -194,7 +200,7 @@ Please fill in the answers below so our developers can fulfill your order:
             .setTimestamp();
 
         const updatedRow = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId("close_ticket").setLabel("📕 Close Ticket").setStyle(ButtonStyle.Danger),
+            new ButtonBuilder.setCustomId("close_ticket").setLabel("📕 Close Ticket").setStyle(ButtonStyle.Danger),
             new ButtonBuilder().setCustomId("claimed").setLabel(`⚙️ Claimed by ${claimedBy.username}`).setStyle(ButtonStyle.Secondary).setDisabled(true)
         );
 
