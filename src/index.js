@@ -8,8 +8,12 @@ const {
     ButtonStyle,
     Events,
     EmbedBuilder,
-    ActivityType
+    ActivityType,
+    ModalBuilder,
+    TextInputBuilder,
+    TextInputStyle
 } = require("discord.js");
+
 const { readdirSync } = require("fs");
 const colors = require("colors");
 
