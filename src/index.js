@@ -25,6 +25,7 @@ const categoryId = "1413535890890031104"; // ticket category ID
 const staffRoleId = "1412831815793901579"; // staff role ID
 const orderLogChannelId = "1414807932457193612"; // log channel ID
 const autoDeleteChannelId = "1413564722191536129"; // auto-delete channel ID
+const reviewChannelId = "1413564722191536129"; // channel where reviews go
 // ==============================
 
 const client = new Client({
@@ -78,9 +79,62 @@ client.once("ready", async () => {
     startReminderChecker();
 });
 
-// === your commands + interaction handlers (keep as in your code) ===
+// === REVIEW SYSTEM ===
+client.on(Events.InteractionCreate, async (interaction) => {
+    if (interaction.isButton()) {
+        if (interaction.customId === "leave_review") {
+            const modal = new ModalBuilder()
+                .setCustomId("review_modal")
+                .setTitle("📝 Leave a Review");
 
-// 🔔 Reminder System
+            const ratingInput = new TextInputBuilder()
+                .setCustomId("review_rating")
+                .setLabel("⭐ Rating (1-5)")
+                .setStyle(TextInputStyle.Short)
+                .setPlaceholder("e.g. 5")
+                .setRequired(true);
+
+            const commentInput = new TextInputBuilder()
+                .setCustomId("review_comment")
+                .setLabel("💬 Comment")
+                .setStyle(TextInputStyle.Paragraph)
+                .setPlaceholder("Write your feedback...")
+                .setRequired(true);
+
+            const row1 = new ActionRowBuilder().addComponents(ratingInput);
+            const row2 = new ActionRowBuilder().addComponents(commentInput);
+
+            modal.addComponents(row1, row2);
+            await interaction.showModal(modal);
+        }
+    }
+
+    if (interaction.isModalSubmit()) {
+        if (interaction.customId === "review_modal") {
+            const rating = interaction.fields.getTextInputValue("review_rating");
+            const comment = interaction.fields.getTextInputValue("review_comment");
+
+            const reviewEmbed = new EmbedBuilder()
+                .setTitle("📢 New Review Submitted")
+                .addFields(
+                    { name: "👤 User", value: interaction.user.tag, inline: true },
+                    { name: "⭐ Rating", value: rating, inline: true },
+                    { name: "💬 Comment", value: comment }
+                )
+                .setColor(0x00ff99)
+                .setTimestamp();
+
+            const channel = await client.channels.fetch(reviewChannelId);
+            if (channel) {
+                channel.send({ embeds: [reviewEmbed] });
+            }
+
+            await interaction.reply({ content: "✅ Thank you for your review!", ephemeral: true });
+        }
+    }
+});
+
+// === REMINDER SYSTEM ===
 function startReminderChecker() {
     setInterval(async () => {
         const now = new Date();
@@ -120,7 +174,7 @@ function startReminderChecker() {
     console.log("🔔 Reminder checker started - checking every 1 minute");
 }
 
-// 🧹 Auto-delete messages
+// === AUTO-DELETE SYSTEM ===
 const DELETE_INTERVAL_MS = 5 * 60 * 1000;
 
 setInterval(async () => {
