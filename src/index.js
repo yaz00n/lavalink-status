@@ -247,18 +247,19 @@ Please fill in the answers below so our developers can fulfill your order:
             return interaction.reply({ content: "❌ Please enter a valid rating between 1 and 5.", ephemeral: true });
         }
 
-        const reviewChannelId = "1413588181043122186"; // Replace with your actual channel ID
+        const reviewChannelId = "YOUR_REVIEW_CHANNEL_ID"; // Replace with your actual review channel ID
         const reviewChannel = interaction.guild.channels.cache.get(reviewChannelId);
         if (!reviewChannel) return interaction.reply({ content: "❌ Review channel not found.", ephemeral: true });
 
-        const reviewEmbed = new EmbedBuilder()
-            .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
-            .setTitle(`⭐ ${rating}/5 Review`)
-            .setDescription(description)
-            .setColor(0x2b2d31)
-            .setThumbnail(interaction.user.displayAvatarURL())
-            .setFooter({ text: `Review ID: ${Math.random().toString(36).substring(2, 10)}`, iconURL: client.user.displayAvatarURL() })
-            .setTimestamp();
+const reviewEmbed = new EmbedBuilder()
+    .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
+    .setTitle(`${"⭐".repeat(Number(rating))} (${rating}/5)`)
+    .setDescription(description)
+    .setColor(0x2b2d31)
+    .setThumbnail(interaction.user.displayAvatarURL())
+    .setFooter({ text: `Review ID: ${Math.random().toString(36).substring(2, 10)}`, iconURL: client.user.displayAvatarURL() })
+    .setTimestamp();
+
 
         const reviewButtons = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("report_review").setLabel("Report").setStyle(ButtonStyle.Danger),
@@ -268,6 +269,40 @@ Please fill in the answers below so our developers can fulfill your order:
 
         await reviewChannel.send({ embeds: [reviewEmbed], components: [reviewButtons] });
         await interaction.reply({ content: "✅ Your review has been submitted!", ephemeral: true });
+    }
+
+    // 🛡️ Handle Report Review
+    if (interaction.customId === "report_review") {
+        const reportChannelId = "1415393968027340934";
+        const reportChannel = interaction.guild.channels.cache.get(reportChannelId);
+        if (!reportChannel) return interaction.reply({ content: "❌ Report channel not found.", ephemeral: true });
+
+        const reportedMessage = await interaction.message.fetch().catch(() => null);
+        if (!reportedMessage) return interaction.reply({ content: "❌ Could not fetch the review message.", ephemeral: true });
+
+        const reportEmbed = new EmbedBuilder()
+            .setTitle("🚨 Review Reported")
+            .setColor(0xff0000)
+            .addFields(
+                { name: "Reported By", value: `${interaction.user.tag}`, inline: true },
+                { name: "Review Author", value: `${reportedMessage.embeds[0]?.author?.name || "Unknown"}`, inline: true },
+                { name: "Review Content", value: reportedMessage.embeds[0]?.description || "No description provided", inline: false },
+                { name: "Review ID", value: reportedMessage.embeds[0]?.footer?.text || "N/A", inline: false }
+            )
+            .setTimestamp()
+            .setFooter({ text: `Guild: ${interaction.guild.name}`, iconURL: interaction.guild.iconURL() });
+
+        await reportChannel.send({ embeds: [reportEmbed] });
+        await interaction.reply({ content: "✅ Review has been reported.", ephemeral: true });
+    }
+
+    // ❤️ Handle Useful Review
+    if (interaction.customId === "useful_review") {
+        const reviewMessage = await interaction.message.fetch().catch(() => null);
+        if (!reviewMessage) return interaction.reply({ content: "❌ Could not fetch the review message.", ephemeral: true });
+
+        await reviewMessage.react("❤️").catch(() => {});
+        await interaction.reply({ content: "💖 Thanks for marking this review as useful!", ephemeral: true });
     }
 });
 
