@@ -247,7 +247,7 @@ Please fill in the answers below so our developers can fulfill your order:
             return interaction.reply({ content: "❌ Please enter a valid rating between 1 and 5.", ephemeral: true });
         }
 
-        const reviewChannelId = "YOUR_REVIEW_CHANNEL_ID"; // Replace with your actual channel ID
+        const reviewChannelId = "1413588181043122186"; // Replace with your actual channel ID
         const reviewChannel = interaction.guild.channels.cache.get(reviewChannelId);
         if (!reviewChannel) return interaction.reply({ content: "❌ Review channel not found.", ephemeral: true });
 
