@@ -200,14 +200,77 @@ Please fill in the answers below so our developers can fulfill your order:
             .setTimestamp();
 
         const updatedRow = new ActionRowBuilder().addComponents(
-            new ButtonBuilder.setCustomId("close_ticket").setLabel("📕 Close Ticket").setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId("close_ticket").setLabel("📕 Close Ticket").setStyle(ButtonStyle.Danger),
             new ButtonBuilder().setCustomId("claimed").setLabel(`⚙️ Claimed by ${claimedBy.username}`).setStyle(ButtonStyle.Secondary).setDisabled(true)
         );
 
         await interaction.update({ components: [updatedRow] });
         await interaction.channel.send({ embeds: [claimEmbed] });
     }
+
+    // 📝 Review Modal Trigger
+    if (interaction.customId === "submit_review") {
+        const modal = new ModalBuilder()
+            .setCustomId("review_modal")
+            .setTitle("📝 Submit Your Review");
+
+        const ratingInput = new TextInputBuilder()
+            .setCustomId("review_rating")
+            .setLabel("What rating would you like to give? (1–5) *")
+            .setStyle(TextInputStyle.Short)
+            .setRequired(true)
+            .setMaxLength(1)
+            .setPlaceholder("Enter a number between 1 and 5");
+
+        const descriptionInput = new TextInputBuilder()
+            .setCustomId("review_description")
+            .setLabel("Description of your review *")
+            .setStyle(TextInputStyle.Paragraph)
+            .setRequired(true)
+            .setMaxLength(1000)
+            .setPlaceholder("Write your feedback here...");
+
+        modal.addComponents(
+            new ActionRowBuilder().addComponents(ratingInput),
+            new ActionRowBuilder().addComponents(descriptionInput)
+        );
+
+        await interaction.showModal(modal);
+    }
+
+    // 🧾 Handle Modal Submission
+    if (interaction.type === InteractionType.ModalSubmit && interaction.customId === "review_modal") {
+        const rating = interaction.fields.getTextInputValue("review_rating");
+        const description = interaction.fields.getTextInputValue("review_description");
+
+        if (!["1", "2", "3", "4", "5"].includes(rating)) {
+            return interaction.reply({ content: "❌ Please enter a valid rating between 1 and 5.", ephemeral: true });
+        }
+
+        const reviewChannelId = "YOUR_REVIEW_CHANNEL_ID"; // Replace with your actual channel ID
+        const reviewChannel = interaction.guild.channels.cache.get(reviewChannelId);
+        if (!reviewChannel) return interaction.reply({ content: "❌ Review channel not found.", ephemeral: true });
+
+        const reviewEmbed = new EmbedBuilder()
+            .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
+            .setTitle(`⭐ ${rating}/5 Review`)
+            .setDescription(description)
+            .setColor(0x2b2d31)
+            .setThumbnail(interaction.user.displayAvatarURL())
+            .setFooter({ text: `Review ID: ${Math.random().toString(36).substring(2, 10)}`, iconURL: client.user.displayAvatarURL() })
+            .setTimestamp();
+
+        const reviewButtons = new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId("report_review").setLabel("Report").setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId("submit_review").setLabel("Submit A Review").setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId("useful_review").setLabel("Useful").setStyle(ButtonStyle.Secondary)
+        );
+
+        await reviewChannel.send({ embeds: [reviewEmbed], components: [reviewButtons] });
+        await interaction.reply({ content: "✅ Your review has been submitted!", ephemeral: true });
+    }
 });
+
 
 // 🧹 Auto-delete messages
 const AUTO_DELETE_CHANNEL_ID = "1413564722191536129";
