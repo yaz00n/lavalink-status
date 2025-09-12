@@ -105,7 +105,7 @@ module.exports = async (client) => {
       const rembed = new EmbedBuilder()
         .setColor(resolveColor("#2F3136"))
         .setAuthor({
-          name: `Lavalink Monitor`,
+          name: `NewGen Nodes Monitor`,
           iconURL: client.user.displayAvatarURL({ forceStatic: false }),
         })
         .setDescription(`\`\`\`diff\n${data.join("\n\n")}\`\`\``)
