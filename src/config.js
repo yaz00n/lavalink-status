@@ -10,16 +10,16 @@ module.exports = {
       host: "194.58.66.44", // Your lavalink host address 
       password: "newgenstudio", // Your lavalink password
       port: 6284, // Your lavalink port
-      identifier: "NewGen Studio Lavalink", // Name for your lavalink
+      identifier: "NewGen Studio Node 1", // Name for your lavalink
       secure: false, // set to true if your lavalink has SSL
       reconnectTimeout: 300000,
       reconnectTries: 100,
     },
     {
-      host: "194.58.66.44",  
+      host: "fi2.bot-hosting.net",  
       password: "newgenstudio", 
-      port: 6284, 
-      identifier: "NewGen Studio Lavalink",
+      port: 21408, 
+      identifier: "NewGen Studio Node 2",
       secure: false,
       reconnectTimeout: 300000,
       reconnectTries: 100,
