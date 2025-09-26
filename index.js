@@ -440,15 +440,17 @@ if (interaction.customId === "view_products") {
 
   // 🎟️ Ticket Management
   if (interaction.customId === "claim_ticket") {
-    const ticket = activeTickets.get(channelId);
-    if (!ticket) return interaction.reply({ content: "❌ Ticket not found.", flags: MessageFlags.Ephemeral });
-    if (ticket.claimedBy) return interaction.reply({ content: `❌ Already claimed by <@${ticket.claimedBy}>`, flags: MessageFlags.Ephemeral });
+  await interaction.deferReply({ ephemeral: true });
+  
+  const ticket = activeTickets.get(interaction.channel.id);
+  if (!ticket) return interaction.editReply({ content: "❌ Ticket not found." });
+  if (ticket.claimedBy) return interaction.editReply({ content: `❌ Already claimed by <@${ticket.claimedBy}>` });
 
-    ticket.claimedBy = interaction.user.id;
-    activeTickets.set(channelId, ticket);
+  ticket.claimedBy = interaction.user.id;
+  activeTickets.set(interaction.channel.id, ticket);
 
-    await interaction.reply({ content: `✅ <@${interaction.user.id}> has claimed this ticket!` });
-  }
+  await interaction.editReply({ content: `✅ <@${interaction.user.id}> has claimed this ticket!` });
+}
 
   if (interaction.customId === "complete_ticket") {
     const ticket = activeTickets.get(channelId);
