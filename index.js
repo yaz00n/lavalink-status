@@ -106,6 +106,10 @@ async function createTicket(interaction) {
     ],
   });
 
+  // ✅ Add ticket immediately
+  activeTickets.set(channel.id, { userId: interaction.user.id, claimedBy: null });
+
+  // Now send the messages
   const embed = new EmbedBuilder()
     .setTitle("# Your Custom Bot Order 🛒")
     .setDescription(
@@ -136,6 +140,7 @@ async function createTicket(interaction) {
     components: [row],
   });
   await msg.pin();
+}
 
   activeTickets.set(channel.id, { userId: interaction.user.id, claimedBy: null });
 
