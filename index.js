@@ -322,12 +322,14 @@ if (interaction.isButton()) {
 
   // ✅ Create Order Button
   if (interaction.customId === "create_order") {
-    const channel = await createTicket(interaction);
-    return interaction.reply({
-      content: `✅ Your ticket has been created: ${channel}`,
-      flags: MessageFlags.Ephemeral,
-    });
-  }
+  await interaction.deferReply({ ephemeral: true }); // prevents interaction timeout
+
+  const ticketChannel = await createTicket(interaction); // ticket is added to activeTickets inside
+
+  await interaction.editReply({
+    content: `✅ Your ticket has been created: ${ticketChannel}`,
+  });
+}
 
   // 💰 Prices Button
 // 💰 Prices Button
